@@ -239,9 +239,9 @@ osd_isp: osd
 osd_isp: TARGET = osd_merkur
 osd_isp: MCU_TARGET = atmega128rfa1
 osd_isp: ISPTOOL = dragon_jtag
+osd_isp: EFUSE = FD
 osd_isp: HFUSE = 98
 osd_isp: LFUSE = F6
-osd_isp: EFUSE = FD
 osd_isp: isp
 
 isp: $(TARGET)
