@@ -1105,6 +1105,10 @@ void flash_led(uint8_t count)
 		_delay_ms(100);
 	}
 }
+char get_mac(uint8_t index)
+{
+	return(default_mac_address[index]);
+}
 
 
 /* end of file ATmegaBOOT.c */

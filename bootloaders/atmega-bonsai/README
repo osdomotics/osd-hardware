@@ -4,3 +4,8 @@ make osd
 make osd_isp
 
 
+todo:
+
+0x0001f3a0                get_mac
+
+jump to get_mac over jump tables
