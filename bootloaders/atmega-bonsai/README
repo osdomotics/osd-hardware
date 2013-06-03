@@ -1,0 +1,6 @@
+Build the Bootloader for the Merkur Breakoutboard:
+
+make osd
+make osd_isp
+
+
