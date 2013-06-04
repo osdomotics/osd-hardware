@@ -130,7 +130,7 @@ LOAD /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x0001f000      0x87e
+.text           0x0001f000      0x88a
  *(.vectors)
  .vectors       0x0001f000      0x120 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm128rfa1.o
                 0x0001f000                __vectors
@@ -260,7 +260,7 @@ LOAD /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a
                 0x0001f166                __vector_20
                 0x0001f166                __vector_42
                 0x0001f166                __vector_65
- .text          0x0001f16a      0x6e4 ATmegaBOOT_168.o
+ .text          0x0001f16a      0x6f0 ATmegaBOOT_168.o
                 0x0001f16a                putch
                 0x0001f196                puthex
                 0x0001f1d2                getch
@@ -271,27 +271,27 @@ LOAD /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a
                 0x0001f33c                nothing_response
                 0x0001f36e                flash_led
                 0x0001f3a0                get_mac
-                0x0001f3ac                main
- .text          0x0001f84e        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
- .text          0x0001f84e        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
- .text          0x0001f84e        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(eerd_byte_atmega128rfa1.o)
- .text          0x0001f84e        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(eewr_byte_atmega128rfa1.o)
-                0x0001f84e                . = ALIGN (0x2)
+                0x0001f3b8                main
+ .text          0x0001f85a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
+ .text          0x0001f85a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
+ .text          0x0001f85a        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(eerd_byte_atmega128rfa1.o)
+ .text          0x0001f85a        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(eewr_byte_atmega128rfa1.o)
+                0x0001f85a                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x0001f84e        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
- .text.libgcc   0x0001f84e        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x0001f85a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
+ .text.libgcc   0x0001f85a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
  .text.avr-libc
-                0x0001f84e       0x10 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(eerd_byte_atmega128rfa1.o)
-                0x0001f84e                __eerd_byte_m128rfa1
+                0x0001f85a       0x10 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(eerd_byte_atmega128rfa1.o)
+                0x0001f85a                __eerd_byte_m128rfa1
  .text.avr-libc
-                0x0001f85e       0x1c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(eewr_byte_atmega128rfa1.o)
-                0x0001f85e                __eewr_byte_m128rfa1
-                0x0001f860                __eewr_r18_m128rfa1
-                0x0001f87a                . = ALIGN (0x2)
+                0x0001f86a       0x1c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(eewr_byte_atmega128rfa1.o)
+                0x0001f86a                __eewr_byte_m128rfa1
+                0x0001f86c                __eewr_r18_m128rfa1
+                0x0001f886                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0001f87a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
-                0x0001f87a                exit
-                0x0001f87a                _exit
+ .fini9         0x0001f886        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
+                0x0001f886                exit
+                0x0001f886                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -310,11 +310,11 @@ LOAD /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0001f87a        0x4 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
+ .fini0         0x0001f886        0x4 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
  *(.fini0)
-                0x0001f87e                _etext = .
+                0x0001f88a                _etext = .
 
-.data           0x00800200        0x2 load address 0x0001f87e
+.data           0x00800200        0x2 load address 0x0001f88a
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800200        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm128rfa1.o
@@ -355,8 +355,8 @@ LOAD /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a
                 0x0080030b                address_high
                 0x0080030c                flags
                 0x0080030d                PROVIDE (__bss_end, .)
-                0x0001f87e                __data_load_start = LOADADDR (.data)
-                0x0001f880                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0001f88a                __data_load_start = LOADADDR (.data)
+                0x0001f88c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080030d        0x0
                 0x0080030d                PROVIDE (__noinit_start, .)
