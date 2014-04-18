@@ -33,10 +33,10 @@
 
 #include <avr/pgmspace.h>
 
-#define NUM_DIGITAL_PINS            26
-#define NUM_ANALOG_INPUTS           8
-#define analogInputToDigitalPin(p)  ((p < 8) ? (p) + 26 : -1)
-#define digitalPinHasPWM(p)         ((p) == 3 ||(p) == 4 ||(p) == 5 ||(p) == 8 ||(p) == 9 ||(p) == 19 ||(p) == 34 || (p) == 35)
+#define NUM_DIGITAL_PINS            15
+#define NUM_ANALOG_INPUTS           6
+#define analogInputToDigitalPin(p)  ((p < NUM_ANALOG_INPUTS) ? (p) + NUM_DIGITAL_PINS  : -1)
+#define digitalPinHasPWM(p)         ((p) == 2 ||(p) == 3 ||(p) == 4 ||(p) == 14 )
 
 // Dev board specific defines: RF RX and TX LEDs:
 #define RXLED_DDR  DDRB
@@ -49,46 +49,40 @@
 
 const static uint8_t SS   = 10;
 const static uint8_t MOSI = 11;
-const static uint8_t MISO = 12;
-const static uint8_t SCK  = 13;
+const static uint8_t MISO = 13;
+const static uint8_t SCK  = 12;
 
-const static uint8_t SDA = 14;
-const static uint8_t SCL = 15;
-const static uint8_t LED = 34;
-const static uint8_t LED1 = 34;
-const static uint8_t LED2 = 35;
+const static uint8_t SDA = 9;
+const static uint8_t SCL = 8;
+const static uint8_t LED = 4;
+const static uint8_t LED1 = 4;
+const static uint8_t LED2 = 5;
 
-const static uint8_t A0 = 26;
-const static uint8_t A1 = 27;
-const static uint8_t A2 = 28;
-const static uint8_t A3 = 29;
-const static uint8_t A4 = 30;
-const static uint8_t A5 = 31;
-const static uint8_t A6 = 32;
-const static uint8_t A7 = 33;
+const static uint8_t A0 = 15;
+const static uint8_t A1 = 16;
+const static uint8_t A2 = 17;
+const static uint8_t A3 = 18;
+const static uint8_t A4 = 19;
+const static uint8_t A5 = 20;
+const static uint8_t A6 = 21;
+const static uint8_t A7 = 22;
 
 // A majority of the pins are NOT PCINTs, SO BE WARNED (i.e. you cannot use them as receive pins)
 // Only pins available for RECEIVE (TRANSMIT can be on any pin):
-// Pins: 7, 8, 9, 10, 11, 12, 13, 20
+// Pins: 10, 11, 12, 13, 14
 
-#define digitalPinToPCICR(p)    ( (((p) >= 7) && ((p) <= 13)) || \
-                                  ((p) == 20) ? (&PCICR) : ((uint8_t *)0) )
+#define digitalPinToPCICR(p)    ( (((p) >= 10) && ((p) <= 14)) || ? (&PCICR) : ((uint8_t *)0) )
 
-#define digitalPinToPCICRbit(p) ( ((p) == 7) ? 1 : 0 ) 
+#define digitalPinToPCICRbit(p) ( 0 ) 
 
-#define digitalPinToPCMSK(p)    ( ((((p) >= 8) && ((p) <= 13)) || ((p) == 20)) ? (&PCMSK0) : \
-                                ( ((p) == 7) ? (&PCMSK1) : \
-                                ((uint8_t *)0) ) )
+#define digitalPinToPCMSK(p)    ( (((p) >= 10) && ((p) <= 14))  ? (&PCMSK0) : ((uint8_t *)0) )
 
-#define digitalPinToPCMSKbit(p) ( ((p) == 7) ? 0 : \
-                                ( ((p) == 8) ? 4 : \
-                                ( ((p) == 9) ? 7 : \
-                                ( ((p) == 10) ? 6 : \
+#define digitalPinToPCMSKbit(p) ( ((p) == 10) ? 6 : \
                                 ( ((p) == 11) ? 5 : \
-                                ( ((p) == 12) ? 3 : \
-                                ( ((p) == 13) ? 1 : \
-                                ( ((p) == 20) ? 2 : \
-                                0 ) ) ) ) ) )
+                                ( ((p) == 12) ? 1 : \
+                                ( ((p) == 13) ? 3 : \
+                                ( ((p) == 14) ? 7 : \
+                                0 ) ) ) ) )
 
 #ifdef ARDUINO_MAIN
 
@@ -143,42 +137,42 @@ const uint16_t PROGMEM port_to_input_PGM[] = {
 const uint8_t PROGMEM digital_pin_to_port_PGM[] = {
 	// PORTLIST		
 	// -------------------------------------------		
-	PE	, // PE 0 ** 0 ** D0 / USART0_RX	
-	PE	, // PE 1 ** 1 ** D1 / USART0_TX	
-	PE	, // PE 2 ** 2 ** D2
-	PE	, // PE 3 ** 3 ** D3 / PWM
-	PE	, // PE 4 ** 4 ** D4 / PWM
-	PE	, // PE 5 ** 5 ** D5 / PWM
-	PE	, // PE 6 ** 6 ** D6
-	PE	, // PE 7 ** 7 ** D7
-	PB	, // PB 5 ** 8 ** D8 / PWM
-	PB	, // PB 4 ** 9 ** D9 / PWM
+	PE	, // PE 1 ** 0 ** D0 / USART0_TX	
+	PE	, // PE 0 ** 1 ** D1 / USART0_RX	
+	PE	, // PE 3 ** 2 ** D2 / PWM
+	PE	, // PE 4 ** 3 ** D3 / PWM
+	PE	, // PE 5 ** 4 ** D4 / PWM / LED1 / LED 
+	PE	, // PE 6 ** 5 ** D5 / LED2
+	PD	, // PD 3 ** 6 ** D6 / USART1_TX
+	PD	, // PD 2 ** 7 ** D7 / USART1_RX
+	PD	, // PD 0 ** 8 ** D8 / I2C_SCL
+	PD	, // PD 1 ** 9 ** D9 / I2C_SDA
 	PB	, // PB 0 ** 10 ** D10 / SPI_SSN
 	PB	, // PB 2 ** 11 ** D11 / SPI_MOSI
-	PB	, // PB 3 ** 12 ** D12 / SPI_MISO
-	PB	, // PB 1 ** 13 ** D13 / SPI_SCK
-	PD	, // PD 1 ** 14 ** D14 / I2C_SDA
-	PD	, // PD 0 ** 15 ** D15 / I2C_SCL
-	PG	, // PG 0 ** 16 ** D16
-	PG	, // PG 1 ** 17 ** D17
-	PG	, // PG 2 ** 18 ** D18
-	PG	, // PG 5 ** 19 ** D19 / PWM
-	PD	, // PD 2 ** 20 ** D20 / USART1_RX
-	PD	, // PD 3 ** 21 ** D21 / USART1_TX
-	PD	, // PD 4 ** 22 ** D22
-	PD	, // PD 5 ** 23 ** D23
-	PD	, // PD 6 ** 24 ** D24
-	PD	, // PD 7 ** 25 ** D25
-	PF	, // PF 0 ** 26 ** A0 / D26
-	PF	, // PF 1 ** 27 ** A1 / D27
-	PF	, // PF 2 ** 28 ** A2 / D28
-	PF	, // PF 3 ** 29 ** A3 / D29
-	PF	, // PF 4 ** 30 ** A4 / D30	
-	PF	, // PF 5 ** 31 ** A5 / D31	
-	PF	, // PF 6 ** 32 ** A6 / D32	
-	PF	, // PF 7 ** 33 ** A7 / D33
-	PB	, // PB 6 ** 34 ** D34 / LED1 / LED / PWM
-	PB	, // PB 7 ** 35 ** D35 / LED2 / PWM
+	PB	, // PB 1 ** 12 ** D12 / SPI_SCK
+	PB	, // PB 3 ** 13 ** D13 / SPI_MISO
+	PB	, // PB 4 ** 14 ** D14 / PWM 
+	PF	, // PF 7 ** 15 ** A0 / D15
+	PF	, // PF 6 ** 16 ** A1 / D16	
+	PF	, // PF 5 ** 17 ** A4 / D17	
+	PF	, // PF 4 ** 18 ** A3 / D18	
+	PF	, // PF 0 ** 19 ** A4 / D19
+	PF	, // PF 1 ** 20 ** A5 / D20
+//	PB	, // PB 6 ** 34 ** D34 / LED1 / LED / PWM
+//	PB	, // PB 7 ** 35 ** D35 / LED2 / PWM
+//	PE	, // PE 2 ** 2 ** D2
+//	PE	, // PE 7 ** 7 ** D7
+//	PB	, // PB 5 ** 8 ** D8 / PWM
+//	PG	, // PG 0 ** 16 ** D16
+//	PG	, // PG 1 ** 17 ** D17
+//	PG	, // PG 2 ** 18 ** D18
+//	PG	, // PG 5 ** 19 ** D19 / PWM
+//	PD	, // PD 4 ** 22 ** D22
+//	PD	, // PD 5 ** 23 ** D23
+//	PD	, // PD 6 ** 24 ** D24
+//	PD	, // PD 7 ** 25 ** D25
+//	PF	, // PF 2 ** 28 ** A2 / D28
+//	PF	, // PF 3 ** 29 ** A3 / D29
 };
 
 const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[] = {
