@@ -1,4 +1,4 @@
-rf128.name=ATmega128RFA1 Dev Board
+rf128.name=Merkur Dev Board
 
 rf128.upload.protocol=arduino
 rf128.upload.maximum_size=126976
