@@ -1,5 +1,6 @@
 #!/bin/bash
-nano eui64.h
+echo -n "Enter MAC ADDRESS>"
+read mac
 make clean
-make osd
+make osd EUI64_ADDRESS="$mac"
 sudo make osd_isp

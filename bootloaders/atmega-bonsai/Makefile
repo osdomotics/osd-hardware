@@ -50,7 +50,6 @@ STK500-2 = $(STK500) -d$(MCU_TARGET) -ms -q -lCF -LCF -cUSB -I200kHz -s -wt
 
 
 OBJ        = $(PROGRAM).o
-#OPTIMIZE   =
 OPTIMIZE   = -O2
 
 DEFS       = 
@@ -66,9 +65,19 @@ override LDFLAGS       = -Wl,-Map,$(PROGRAM).map,$(LDSECTION)
 
 OBJCOPY        = avr-objcopy
 OBJDUMP        = avr-objdump
+SED            = sed
 
-#all: mega diecimila zigduino
-#all: zigduino
+# By default we use the manually-assigned VMWare range of MAC addresses
+# VMWare Range is 00:50:56:XX:YY:ZZ
+# Where XX is a between 00 and 3F and YY and ZZ are between 00 and FF.
+# From this we generate the EUI64.
+# But you really should assign the address that is printed on your Board!
+EUI64_ADDRESS    = 00:50:56:FF:FF:03:04:05
+PARAMS_EUI64ADDR =                                              \
+    $(shell echo ${EUI64_ADDRESS}                               \
+     | $(SED) -e 's/^/{0x/' -e 's/:/, 0x/g' -e 's/$$/}/'        \
+     )
+
 all: osd
 
 lilypad: TARGET = lilypad
@@ -218,22 +227,17 @@ zigduino_isp: LFUSE = FF
 zigduino_isp: EFUSE = F5
 zigduino_isp: isp
 
-#zigduino-bootloader: zigduino
-
-#osd-bootloader: osd
-
 osd: TARGET = atmega128rfa1
 osd: MCU_TARGET = atmega128rfa1
-osd: CFLAGS += '-DMAX_TIME_COUNT=F_CPU>>4' '-DNUM_LED_FLASHES=5' -DBAUD_RATE=57600
+osd: CFLAGS += '-DMAX_TIME_COUNT=F_CPU>>4' '-DNUM_LED_FLASHES=5' \
+    -DBAUD_RATE=57600 -DPARAMS_EUI64ADDR='${PARAMS_EUI64ADDR}'
 osd: AVR_FREQ = 16000000L 
-osd: LDSECTION  = --section-start=.text=0x1F000
+osd: LDSECTION  = --section-start=.text=0x1F000,--section-start=.jumps=0x1FF80
 osd: $(PROGRAM)_osd_merkur.hex
 osd: OSD_TARGET = merkur
 osd: CFLAGS += '-DOSD_TARGET=$(OSD_TARGET)'
-#osd: $(PROGRAM)_atmega128rfa1.elf
-#	cp $(PROGRAM)_atmega128rfa1.elf osd-bootloader.elf
-#	cp $(PROGRAM).o osd-bootloader.o
 
+ATmegaBOOT_168_osd_merkur.elf: $(PROGRAM).o jumptable.o
 
 osd_isp: osd
 osd_isp: TARGET = osd_merkur
@@ -262,11 +266,13 @@ clean:
 	$(OBJDUMP) -h -S $< > $@
 
 %.hex: %.elf
-	$(OBJCOPY) -j .text -j .data -O ihex $< $@
+	$(OBJCOPY) -j .text -j .data -j .jumps -O ihex $< $@
 
 %.srec: %.elf
-	$(OBJCOPY) -j .text -j .data -O srec $< $@
+	$(OBJCOPY) -j .text -j .data -j .jumps -O srec $< $@
 
 %.bin: %.elf
-	$(OBJCOPY) -j .text -j .data -O binary $< $@
-	
+	$(OBJCOPY) -j .text -j .data -j .jumps -O binary $< $@
+
+%.o: %.s
+	$(CC) -c $(CFLAGS) -o $@ $^

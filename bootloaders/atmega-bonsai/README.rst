@@ -1,32 +1,40 @@
 Bootloader for the Merkur Breakoutboard
 =======================================
 
-The MAC Address of the board is defined in the file::
+The EUI-64 Address of the board is computed from the MAC address, for
+details, see the `Wikipedia`_ article on MAC addresses and the algorithm
+described there to convert a MAC-48 into an EUI-64. When building the
+bootloader you should specify the EUI-64 address.
 
-    eui64.h
+.. _`Wikipedia`: http://en.wikipedia.org/wiki/MAC_address
 
-You have to edit this file to reflect the address that is printed on
-your board.
+You have to specify the EUI-64 on the command line when building
+the bootloader to reflect the address that is printed on your board.
 
-Build the Bootloader for the Merkur Breakoutboard::
+Build the Bootloader for the Merkur Breakoutboard, replace the given
+``EUI64_ADDRESS`` with the one printed on your board::
 
-    make osd
+    make osd EUI64_ADDRESS=00:50:56:FF:FF:03:04:05
     make osd_isp
 
-These steps (calling the editor on ``eui64.h`` and calling the right
-make steps above) is automated in the shell-script ``flash.sh``, just
-call::
+These steps (prompting the user for the MAC address and calling the
+right make steps above) is automated in the shell-script ``flash.sh``,
+just call::
 
  flash.sh
 
-Todo
-----
+To get the EUI64 address, the contiki application calls a routine in the
+bootloader.
 
-To get the MAC address, the contiki application calls a routine in the
-bootloader. The address of this routine ``get_mac`` is currently
-hard-coded and depends on the compiler (where the compiler puts the
-routine). This address should be put into a jump-table so that the
+Previously the address of this routine ``get_mac`` was
+hard-coded and depended on the compiler (where the compiler puts the
+routine). This address is now in a jump-table so that the
 address can't change when the compiler (or compiler version) changes.
-The current address is::
+The previously hard-coded address was::
 
     0x0001f3a0                get_mac
+
+The new address in the jump-table is::
+
+    0x0001ff80                get_mac
+

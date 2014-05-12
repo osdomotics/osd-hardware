@@ -75,7 +75,6 @@
 #include <avr/interrupt.h>
 #include <avr/wdt.h>
 #include <util/delay.h>
-#include "eui64.h"
 
 /* the current avr-libc eeprom functions do not support the ATmega168 */
 /* own eeprom write/read functions are used instead */
@@ -1105,12 +1104,17 @@ void flash_led(uint8_t count)
 		_delay_ms(100);
 	}
 }
-uint8_t get_mac(uint8_t index)
-{
-//	return(default_mac_address[index]);
-//	return(index);  // OK EUI-64 MAC: 0-1-2-3-4-5-6-7
-	return(pgm_read_byte_far(&default_mac_address[index]));
-}
 
+// Hack: padding so that _get_mac will have the old address, so we're
+// compatible with compiled applications that aren't aware of the new
+// jumptable address. Note that this is needed because the gcc-avr that
+// comes with debian squeeze optimizes a little better than the old one.
+const uint8_t padding [28] PROGMEM = {1, 2};
+
+uint8_t _get_mac(uint8_t index)
+{
+	return pgm_read_byte_far
+            (pgm_get_far_address (default_mac_address) + index);
+}
 
 /* end of file ATmegaBOOT.c */
