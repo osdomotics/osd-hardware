@@ -75,7 +75,7 @@ SED            = sed
 EUI64_ADDRESS    = 00:50:56:FF:FF:03:04:05
 PARAMS_EUI64ADDR =                                              \
     $(shell echo ${EUI64_ADDRESS}                               \
-     | $(SED) -e 's/^/{0x/' -e 's/:/, 0x/g' -e 's/$$/}/'        \
+     | $(SED) -e 's/^/{0x/' -e 's/[:-]/, 0x/g' -e 's/$$/}/'     \
      )
 
 all: osd
