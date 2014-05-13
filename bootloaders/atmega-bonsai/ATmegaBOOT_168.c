@@ -1108,7 +1108,8 @@ void flash_led(uint8_t count)
 // Hack: padding so that _get_mac will have the old address, so we're
 // compatible with compiled applications that aren't aware of the new
 // jumptable address. Note that this is needed because the gcc-avr that
-// comes with debian squeeze optimizes a little better than the old one.
+// comes with debian wheezy optimizes a little better than the old one
+// from debian squeeze.
 const uint8_t padding [28] PROGMEM = {1, 2};
 
 uint8_t _get_mac(uint8_t index)
