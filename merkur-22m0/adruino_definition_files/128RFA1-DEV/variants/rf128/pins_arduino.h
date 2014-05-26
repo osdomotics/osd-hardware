@@ -56,15 +56,23 @@ const static uint8_t SCL = 8;
 const static uint8_t LED = 4;
 const static uint8_t LED1 = 4;
 const static uint8_t LED2 = 5;
-
+/*
 const static uint8_t A0 = 15;
 const static uint8_t A1 = 16;
 const static uint8_t A2 = 17;
 const static uint8_t A3 = 18;
 const static uint8_t A4 = 19;
 const static uint8_t A5 = 20;
-const static uint8_t A6 = 21;
-const static uint8_t A7 = 22;
+*/
+//const static uint8_t A6 = 21;
+//const static uint8_t A7 = 22;
+
+const static uint8_t A0 = 7;
+const static uint8_t A1 = 6;
+const static uint8_t A2 = 5;
+const static uint8_t A3 = 4;
+const static uint8_t A4 = 0;
+const static uint8_t A5 = 1;
 
 // A majority of the pins are NOT PCINTs, SO BE WARNED (i.e. you cannot use them as receive pins)
 // Only pins available for RECEIVE (TRANSMIT can be on any pin):
@@ -153,7 +161,7 @@ const uint8_t PROGMEM digital_pin_to_port_PGM[] = {
 	PB	, // PB 4 ** 14 ** D14 / PWM 
 	PF	, // PF 7 ** 15 ** A0 / D15
 	PF	, // PF 6 ** 16 ** A1 / D16	
-	PF	, // PF 5 ** 17 ** A4 / D17	
+	PF	, // PF 5 ** 17 ** A2 / D17	
 	PF	, // PF 4 ** 18 ** A3 / D18	
 	PF	, // PF 0 ** 19 ** A4 / D19
 	PF	, // PF 1 ** 20 ** A5 / D20
@@ -192,12 +200,12 @@ const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[] = {
 	_BV( 1 )	, // PB 1 ** 12 ** D13 / SPI_SCK
 	_BV( 3 )	, // PB 3 ** 13 ** D12 / SPI_MISO
 	_BV( 4 )	, // PB 4 ** 14 ** D9 / PWM
-	_BV( 7 )	, // PF 7 ** 15 ** A7 / D33
-	_BV( 6 )	, // PF 6 ** 16 ** A6 / D32
-	_BV( 5 )	, // PF 5 ** 17 ** A5 / D31
-	_BV( 4 )	, // PF 4 ** 18 ** A4 / D30			
-	_BV( 0 )	, // PF 0 ** 19 ** A0 / D26
-	_BV( 1 )	, // PF 1 ** 20 ** A1 / D27
+	_BV( 7 )	, // PF 7 ** 15 ** A0 / D33
+	_BV( 6 )	, // PF 6 ** 16 ** A1 / D32
+	_BV( 5 )	, // PF 5 ** 17 ** A2 / D31
+	_BV( 4 )	, // PF 4 ** 18 ** A3 / D30			
+	_BV( 0 )	, // PF 0 ** 19 ** A4 / D26
+	_BV( 1 )	, // PF 1 ** 20 ** A5 / D27
 //	_BV( 2 )	, // PE 2 ** 2 ** D2
 //	_BV( 7 )	, // PE 7 ** 7 ** D7
 //	_BV( 5 )	, // PB 5 ** 8 ** D8 / PWM
@@ -234,14 +242,14 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[] = {
 	NOT_ON_TIMER	, // PB 1 ** 12 ** D13 / SPI_SCK
 	NOT_ON_TIMER	, // PB 3 ** 13 ** D12 / SPI_MISO
 	TIMER2A			, // PB 4 ** 14 ** D9 / PWM
-	NOT_ON_TIMER	, // PF 7 ** 15 ** A7 / D33	
-	NOT_ON_TIMER	, // PF 6 ** 16 ** A6 / D32	
-	NOT_ON_TIMER	, // PF 5 ** 17 ** A5 / D31	
-	NOT_ON_TIMER	, // PF 4 ** 18 ** A4 / D30	
-	NOT_ON_TIMER	, // PF 0 ** 19 ** A0 / D26
-	NOT_ON_TIMER	, // PF 1 ** 20 ** A1 / D27
-//	NOT_ON_TIMER	, // PF 2 ** 28 ** A2 / D28
-//	NOT_ON_TIMER	, // PF 3 ** 29 ** A3 / D29
+	NOT_ON_TIMER	, // PF 7 ** 15 ** A0 / D33	
+	NOT_ON_TIMER	, // PF 6 ** 16 ** A1 / D32	
+	NOT_ON_TIMER	, // PF 5 ** 17 ** A2 / D31	
+	NOT_ON_TIMER	, // PF 4 ** 18 ** A3 / D30	
+	NOT_ON_TIMER	, // PF 0 ** 19 ** A4 / D26
+	NOT_ON_TIMER	, // PF 1 ** 20 ** A5 / D27
+//	NOT_ON_TIMER	, // PF 2 ** 28 ** A6 / D28
+//	NOT_ON_TIMER	, // PF 3 ** 29 ** A7 / D29
 //	NOT_ON_TIMER	, // PE 2 ** 2 ** D2
 //	NOT_ON_TIMER	, // PE 7 ** 7 ** D7
 //	TIMER1A			, // PB 5 ** 8 ** D8 / PWM

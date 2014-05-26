@@ -39,6 +39,27 @@ void analogReference(uint8_t mode)
 
 int analogRead(uint8_t pin)
 {
+  int result = 0;
+
+  if ( pin >= 14 )
+    pin -= 14;
+
+  ADMUX = _BV(REFS1) | _BV(REFS0) | ( pin & 7 ) ;
+  ADCSRA = _BV(ADEN) | _BV(ADPS0) | _BV(ADPS2) ;
+  sbi(ADCSRA,ADSC);
+  loop_until_bit_is_clear(ADCSRA,ADSC);
+
+
+  result = ADC;
+  
+  ADCSRA=0; //disable ADC
+  ADMUX=0; //turn off internal vref
+
+  return result;
+}
+
+int analogRead1(uint8_t pin)
+{
 	uint8_t low, high;
 
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
