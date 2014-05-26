@@ -321,4 +321,14 @@ void init()
 #elif defined(UCSR0B)
 	UCSR0B = 0;
 #endif
+
+// Disable JTAG here so they can be used as normal digital i/o (H.Pichler)
+#if defined(MCUCR)
+  uint8_t temp;
+  /* Get MCUCR */
+  temp = MCUCR;
+  /* disable jtag */
+  MCUCR = temp|(1<<JTD);
+  MCUCR = temp|(1<<JTD);
+#endif
 }
