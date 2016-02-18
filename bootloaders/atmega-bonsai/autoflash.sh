@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # schreibe auf die Datei eeprom_img.hex
-avrdude -p m128rfa1 -c dragon_jtag -U eeprom:r:eeprom_img.hex:i
+sudo avrdude -p m128rfa1 -c dragon_jtag -U eeprom:r:eeprom_img.hex:i
 
 # lese aus der datei eeprom_img.hex und weise die Zeile 4 der
 # Variable mac_zeile zu
@@ -24,4 +24,5 @@ echo "Gelesene MAC Adresse: " ${mac}
 read -p "Stimmt die Adresse? CTRL-C Abbrechen, ENTER fuer Weiter!"
 make clean
 make osd EUI64_ADDRESS="${mac}"
-make osd_ispa
+sudo make osd_isp
+
