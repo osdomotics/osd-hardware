@@ -18,11 +18,10 @@ m2=$(echo ${mac_zeile} |cut -c 30-31)
 m1=$(echo ${mac_zeile} |cut -c 32-33)
 
 # an die variable mac uebergeben
-mac=$(echo ${m1}-${m2}-${m3}-${m4}-${m5}-${m6}-${m7}-${m8})
+mac=$(echo ${m1}:${m2}:${m3}:${m4}:${m5}:${m6}:${m7}:${m8})
 
 echo "Gelesene MAC Adresse: " ${mac}
 read -p "Stimmt die Adresse? CTRL-C Abbrechen, ENTER fuer Weiter!"
 make clean
 make osd EUI64_ADDRESS="${mac}"
 sudo make osd_isp
-
