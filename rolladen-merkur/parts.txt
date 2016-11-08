@@ -1,0 +1,54 @@
+Partlist
+
+Exported from rolladen.brd at 14.01.2014 15:07:06
+
+EAGLE Version 6.3.0 Copyright (c) 1988-2012 CadSoft
+
+Assembly variant: 
+
+Part     Value          Package            Library                 Position (mm)         Orientation
+
+C1       100n           C0603              rcl                     (44.9 16.15)          R270
+C2       10uF/10V       C0805              rcl                     (36.5082 17.59935)    R90
+C3       2u2/400V       TT5D11L            rcl                     (44.475075 28.729515625) R90
+C4       220u/16V       153CLV-0605        rcl                     (40.70519375 12.369425) R180
+C5       100n           C0603              rcl                     (21.8 13)             R180
+C6       10n            C0603              rcl                     (35.33894375 12.032365625) R270
+C7       100n           C0603              rcl                     (26.4 13)             R180
+C9       10u            C0805              rcl                     (33.012603125 10.590540625) R90
+D1       ES1JL          SOD323-W           diode standard          (34.92140625 14.719871875) R180
+D2       ES1JL          SOD323-W           diode standard          (37.410221875 23.746003125) R90
+D3       ES1JL          SOD323-W           diode standard          (21.6 18)             R180
+D4       ES1JL          SOD323-W           diode standard          (26.4 18)             R180
+D5       ES1JL          SOD323-W           diode standard          (43.266525 33.934003125) R180
+D6       Z3.3V          SOD323-W           diode standard          (21.6 15.6)           R180
+D7       Z3.3V          SOD323-W           diode standard          (26.4 15.6)           R180
+IC1      LNK306DN       SO-8C              2CR                     (42.134303125 20.319634375) R90
+IC2      AQH3213AX      SO-08D             2CR                     (5.5 27.5)            R90
+IC3      AQH3213AX      SO-08D             2CR                     (17.7 27.5)           R90
+IC4      NX1117C33Z     SOT223             linear                  (37.054934375 5.5491125) R45
+L3       1mH 250mA      POWER-CHOKE_WE-TPC rcl                     (32.08740625 20.0559) R270
+LED1     red            CHIPLED_0603       led                     (5 9.1)               R0
+Q4       BSS123         SOT23              transistor-small-signal (7 19.2)              R0
+Q5       BSS123         SOT23              transistor-small-signal (15.6 18.75)          R0
+R1       100            R0603              rcl                     (4.35 18.5)           R270
+R2       2k2            R0603              rcl                     (41.9 16.7)           R180
+R3       5k6            R0603              rcl                     (38.8 16.7)           R180
+R4       82k            R0805              rcl                     (25.4 26.1)           R90
+R5       100            R0603              rcl                     (10.8 18.45)          R90
+R6       100            R0603              rcl                     (12.4 18.45)          R270
+R7       82k            R0805              rcl                     (25.4 30.5)           R90
+R8       330            R0603              rcl                     (6.8 9.1)             R270
+R9       100            R0603              rcl                     (2.7 18.5)            R90
+R10      2k2            R0603              rcl                     (22.3 20.4)           R180
+R11      2k2            R0603              rcl                     (42.8 7.9)            R180
+R12      82k            R0805              rcl                     (28.4 26)             R90
+R13      82k            R0805              rcl                     (28.4 30.5)           R90
+R14      2k2            R0603              rcl                     (26.5 20.3)           R180
+R15      470R/0.5W      0411V              rcl                     (40.305140625 37.496471875) R180
+R16      10k            R0603              rcl                     (7 15.8)              R0
+R17      2k2            R0603              rcl                     (42.8 6.2)            R180
+R18      10k            R0603              rcl                     (15.6 15.4)           R0
+S1       KMR            KMR                2CR                     (2.75 11.9)           R180
+SV1                     FE12               con-lsta                (16 2.4)              R180
+X1                      W237-6P            con-wago-508            (23 38.1)             R0
