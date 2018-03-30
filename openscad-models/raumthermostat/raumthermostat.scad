@@ -311,7 +311,7 @@ module epaper() {
     mh=48;
     mth=2;
     dw=27.7;
-    dh=27.7;
+    dh=28.7;
     dmw=32;
     dmh=38.32;
     dth=1.1;
