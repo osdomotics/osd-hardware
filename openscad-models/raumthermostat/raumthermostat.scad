@@ -315,12 +315,15 @@ module epaper() {
     dmw=32;
     dmh=38.32;
     dth=1.1;
+    fw=13;
+    fh=5;
 
     translate ([mh/2,0,0+mth])rotate(a=[0,180,-90])union () {
         color("green")translate([-mw/2,-mh/2,0])cube ([mw,mh,mth]);
         translate([-dmw/2,-dmh/2,mth-0.01])cube ([dmw,dmh,dth]);
         color("red")translate([-dw/2,-dmh/2+(dmw-dw)/2,mth+dth-0.1])cube ([dw,dh,10]);
-        }
+        color("blue")translate([-fw/2,mw/2+fh/2,0+mth-0.65])cube ([fw,fh,dth+0.6]);
+    }
 }
 
 l=51.6;
