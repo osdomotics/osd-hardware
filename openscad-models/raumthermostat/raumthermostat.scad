@@ -326,6 +326,10 @@ module epaper() {
     }
 }
 
+module epaper_snap() {
+    cube([2,6,4]);
+    translate([0,1,2])cube([3,4,2]);
+}
 l=51.6;
 
 union(){
@@ -333,6 +337,10 @@ union(){
         translate ([-l-6,-16.4-34/2,-2])cube([6+l, 16.4*2+34,2.1]);
         translate ([-51.6,0,-0.5])epaper();
     }
+
+     translate([-l-2,-6/2,-1])epaper_snap();
+     rotate([0,0,180])translate([1.6,-14,-1])epaper_snap();
+     rotate([0,0,180])translate([1.6,   8,-1])epaper_snap();
 
     difference () {
         translate([-l-6,-15/2,-1])cube([2,15,1+0.8*14.5+1]);
