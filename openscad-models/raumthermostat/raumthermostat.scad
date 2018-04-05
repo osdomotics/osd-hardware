@@ -329,9 +329,19 @@ module epaper() {
 }
 
 module epaper_snap() {
-    cube([2,6,4]);
-    translate([0,1,2])cube([3,4,2]);
+    hull(){
+        cube([2,6,4]);
+        translate([0,1,2])cube([3,4,2]);
+    }
 }
+
+module prism(l, w, h){
+       polyhedron(
+               points=[[0,0,0], [l,0,0], [l,w,0], [0,w,0], [0,w,h], [l,w,h]],
+               faces=[[0,1,2,3],[5,4,3,2],[0,4,5,1],[0,3,4],[5,2,1]]
+               );
+}
+
 l=51.6;
 
 union(){
@@ -340,9 +350,9 @@ union(){
         translate ([-51.6,0,-0.5])epaper();
     }
 
-     translate([-l-2,-6/2,-1])epaper_snap();
-     rotate([0,0,180])translate([1.1,-14,-1])epaper_snap();
-     rotate([0,0,180])translate([1.1,   8,-1])epaper_snap();
+     translate([-l-2.4,-6/2,-1])epaper_snap();
+     rotate([0,0,180])translate([0.7,-14,-1])epaper_snap();
+     rotate([0,0,180])translate([0.7,   8,-1])epaper_snap();
 
     difference () {
         translate([-l-6,-15/2,-1])cube([2,15,1+1*14.5+1]);
@@ -352,6 +362,9 @@ union(){
     }
     translate([-l-1,-8.2-34/2,0])flexbatterAA(n=1,lr=[-1]);
     translate([-l-1,+8.2+34/2,0])flexbatterAA(n=1,lr=[1]);
+    
+    translate ([-10,-34/2+5.99,11])rotate ([180,0,0])prism (2,6,6);    
+    translate ([-10,+34/2+0.01,5])rotate ([90,0,0])prism (2,6,6);    
 }
 
 
