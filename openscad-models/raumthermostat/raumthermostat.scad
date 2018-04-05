@@ -90,7 +90,7 @@ module sline(angle,radius,i,w,h){
 //  FLEXBATTER:  Flexing battery holder with integrated plastic spring
 //
 //////////////////////////////////////////////////////////////////////////////////
-module flexbatter(n=1,l=65,d=18,hf=0.75,r=4,shd=3,eps=0.28,el=0,xchan=[1/4,3/4],$fn=24){
+module flexbatter(n=1,l=65,d=18,hf=0.75,r=4,shd=3,eps=0.28,el=0,xchan=[1/4,3/4],$fn=24,lr=[1,-1]){
 ew=0.50;   // extrusion width
 eh=0.25;   // extrusion height
 w = 2*ew;  // case wall thickness
@@ -158,7 +158,7 @@ r = d/5+2*ws; // linear spring length (depends on sline() call!)
 //             }
 
          // holes for wires passing inside
-         for(sy=[-1,1])scale([1,sy,1]){
+         for(sy=lr)scale([1,sy,1]){
 	   // translate([l-1,-d/2,w])cube([w+2,2,2]);
             for(x=[3,l-7])translate([x,-d/2-w-ws-1,w])cube([3,w+ws+3,2]); 
          //   translate([3,-d/2+w/2-0.75,-1])cube([3,1.5,w+2]); 
@@ -186,7 +186,7 @@ r = d/5+2*ws; // linear spring length (depends on sline() call!)
 	 //else translate([1,-d/2-w,-0.01])cylinder(r1=ch,r2=0,h=ch);
 
       // freier raum unter der feder
-      //%translate([-2*r,-(d+2*w)/2-0.1,-0.1])cube ([2*r,d+2*w+0.2,1.1]);
+      translate([-2*r,-(d+2*w)/2-0.1,-0.1])cube ([2*r,d+2*w+0.2,2.1]);
 
       }
 
@@ -223,8 +223,8 @@ module flexbatterC(n=1){
    flexbatter(n=n,l=51.6,d=26.4,hf=0.75,shd=3,eps=0.28);
 }  
 
-module flexbatterAA(n=1){
-   flexbatter(n=n,l=51.6,d=14.5,hf=0.80,shd=2.5,el=0.5,eps=0.28);
+module flexbatterAA(n=1,lr=[1,-1]){
+   flexbatter(n=n,l=51.6,d=14.5,hf=1.00,shd=2.5,el=0.5,eps=0.28,lr=lr);
 }  
 
 module flexbatterAAA(n=1){
@@ -307,22 +307,24 @@ module flexbatterAAAx4(){ // AUTO_MAKE_STL
 //translate([-90,33,0])flexbatter18650(n=4);
 
 module epaper() {
-    mw=33;
-    mh=48;
+    mw=33.5;
+    mh=48.5;
     mth=2;
     dw=27.7;
     dh=28.7;
     dmw=32;
-    dmh=38.32;
+    dmh=38.5;//38.32;
     dth=1.1;
-    fw=13;
-    fh=5;
+    fw=13.5;
+    fh=5.5;
 
-    translate ([mh/2,0,0+mth])rotate(a=[0,180,-90])union () {
+    translate ([mh/2,0,0+mth])
+        rotate(a=[0,180,-90])
+        union () {
         color("green")translate([-mw/2,-mh/2,0])cube ([mw,mh,mth]);
         translate([-dmw/2,-dmh/2,mth-0.01])cube ([dmw,dmh,dth]);
         color("red")translate([-dw/2,-dmh/2+(dmw-dw)/2,mth+dth-0.1])cube ([dw,dh,10]);
-        color("blue")translate([-fw/2,mw/2+fh/2,0+mth-0.65])cube ([fw,fh,dth+0.6]);
+        color("blue")translate([-fw/2,mh/2-fh,+mth-0.01])cube ([fw,fh,dth+0.01]);
     }
 }
 
@@ -339,17 +341,17 @@ union(){
     }
 
      translate([-l-2,-6/2,-1])epaper_snap();
-     rotate([0,0,180])translate([1.6,-14,-1])epaper_snap();
-     rotate([0,0,180])translate([1.6,   8,-1])epaper_snap();
+     rotate([0,0,180])translate([1.1,-14,-1])epaper_snap();
+     rotate([0,0,180])translate([1.1,   8,-1])epaper_snap();
 
     difference () {
-        translate([-l-6,-15/2,-1])cube([2,15,1+0.8*14.5+1]);
-        translate ([-l-5,-3/2,10]){
-            chamfered_cube ([5,3,2],0.9);
+        translate([-l-6,-15/2,-1])cube([2,15,1+1*14.5+1]);
+        translate ([-l-5,-4/2,10]){
+            chamfered_cube ([5,4,3],0.9);
         }
     }
-    translate([-l-1,-8.2-34/2,0])flexbatterAA(n=1);
-    translate([-l-1,+8.2+34/2,0])flexbatterAA(n=1);
+    translate([-l-1,-8.2-34/2,0])flexbatterAA(n=1,lr=[-1]);
+    translate([-l-1,+8.2+34/2,0])flexbatterAA(n=1,lr=[1]);
 }
 
 
