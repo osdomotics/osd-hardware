@@ -315,7 +315,7 @@ module epaper() {
     dmw=32;
     dmh=38.5;//38.32;
     dth=1.1;
-    fw=13.5;
+    fw=14;
     fh=5.5;
 
     translate ([mh/2,0,0+mth])
@@ -330,8 +330,8 @@ module epaper() {
 
 module epaper_snap() {
     hull(){
-        cube([2,6,4]);
-        translate([0,1,2])cube([3,4,2]);
+        cube([2,6,5]);
+        translate([1,1,3])cube([3,4,2]);
     }
 }
 
@@ -350,9 +350,9 @@ union(){
         translate ([-51.6,0,-0.5])epaper();
     }
 
-     translate([-l-2.4,-6/2,-1])epaper_snap();
-     rotate([0,0,180])translate([0.7,-14,-1])epaper_snap();
-     rotate([0,0,180])translate([0.7,   8,-1])epaper_snap();
+     translate([-l-2.8,-6/2,-1])epaper_snap();
+     rotate([0,0,180])translate([0.1,-14,-1])epaper_snap();
+     rotate([0,0,180])translate([0.1,   8,-1])epaper_snap();
 
     difference () {
         translate([-l-6,-15/2,-1])cube([2,15,1+1*14.5+1]);
