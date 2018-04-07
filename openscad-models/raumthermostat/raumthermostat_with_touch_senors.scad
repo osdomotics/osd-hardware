@@ -350,7 +350,43 @@ l=51.6;
 
 union(){
     difference () {
-        translate ([-l-10,-16.5-34/2,-2])cube([10+l, 16.5*2+34,2.1]);
+        translate ([-l-10,-16.5-34/2,-2])difference (){
+            cube([10+l, 16.5*2+34,2.1+2.5]);
+            x  = 15.0;
+            dx = 4;
+            translate ([x+dx,1.2,2.1])union () {
+                cube([11.5,15.8,2.7]);
+                translate ([11.5/2,15.8/2,-3])
+                linear_extrude(height = 4) {
+                    rotate (90)mirror([1,0,0])
+                    text ("\uf0c9",size=5,font="FontAwesome",halign="center",valign="center");
+                }
+            }
+            translate ([x+dx+11.5+dx,1.2,2.1])union(){
+                cube([11.5,15.8,2.7]);
+                translate ([11.5/2,15.8/2,-3])
+                linear_extrude(height = 4) {
+                    rotate (90)mirror([1,0,0])
+                    text ("\uf00c",size=5,font="FontAwesome",halign="center",valign="center");
+                }
+            }
+            translate ([x+dx,1.2+33.5+15.2,2.1])union(){
+                cube([11.5,15.8,2.7]);
+                translate ([11.5/2,15.8/2,-3])
+                linear_extrude(height = 4) {
+                    rotate (90)mirror([1,0,0])
+                    text ("\uf077",size=5,font="FontAwesome",halign="center",valign="center");
+                }
+            }
+            translate ([x+dx+11.5+dx,1.2+33.5+15.2,2.1])union(){
+                cube([11.5,15.8,2.7]);
+                translate ([11.5/2,15.8/2,-3])
+                linear_extrude(height = 4) {
+                    rotate (90)mirror([1,0,0])
+                    text ("\uf078",size=5,font="FontAwesome",halign="center",valign="center");
+                }
+            }
+        }    
         translate ([-51.6,0,-0.5])epaper();
     }
 
@@ -359,17 +395,19 @@ union(){
      rotate([0,0,180])translate([0.1,   8,-1])epaper_snap();
 
     difference () {
-        translate([-l-10,-15/2,-1])cube([2,15,1+1*14.5+1]);
-        translate ([-l-9,-4/2,10]){
+        translate([-l-10,-15/2,-1])cube([2,15,1+1*14.5+1+2.5]);
+        translate ([-l-9,-4/2,10+2.5]){
             chamfered_cube ([5,4,3],0.9);
         }
     }
+    translate ([0,0,2.5]){
     translate([-l-1,-8.25-34/2,0])flexbatterAA(n=1,lr=[-1]);
     translate([-l-1,+8.25+34/2,0])flexbatterAA(n=1,lr=[1]);
     
     translate ([-15,-34/2+6.99,11])rotate ([180,0,0])prism (2,7,7);    
     translate ([-15,+34/2+0.01,5])rotate ([90,0,0])prism (2,7,7);    
     }
+}
 
 
 //translate([0,50,0])flexbatterAAA(n=1);
