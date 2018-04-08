@@ -93,9 +93,9 @@ module sline(angle,radius,i,w,h){
 module flexbatter(n=1,l=65,d=18,hf=0.75,r=4,shd=3,eps=0.28,el=0,xchan=[1/4,3/4],$fn=24,lr=[1,-1]){
 ew=0.50;   // extrusion width
 eh=0.25;   // extrusion height
-w = 2*ew;  // case wall thickness
+w = 2*ew+1;  // case wall thickness
 ws = 2*ew; // spring wall thickness
-ch = w-ws; // edge chamfering
+ch = 0;//w-ws; // edge chamfering
 deepen=0; //deepening for side grip of batteries
 //el = 0;  // extra length in spring
 //eps = 0.28;
@@ -186,7 +186,7 @@ r = d/5+2*ws; // linear spring length (depends on sline() call!)
 	 //else translate([1,-d/2-w,-0.01])cylinder(r1=ch,r2=0,h=ch);
 
       // freier raum unter der feder
-      translate([-2*r,-(d+2*w)/2-0.1,-0.1])cube ([2*r,d+2*w+0.2,2.1]);
+      translate([-2*r-0.5,-(d+2*w)/2-0.01,-0.1])cube ([2*r+0.5,d+2*w+0.2,2.1]);
 
       }
 
@@ -224,7 +224,7 @@ module flexbatterC(n=1){
 }  
 
 module flexbatterAA(n=1,lr=[1,-1]){
-   flexbatter(n=n,l=51.6,d=14.5,hf=1.00,shd=2.5,el=0.5,eps=0,lr=lr);
+   flexbatter(n=n,l=51.6,d=14.5,hf=1,shd=2.5,el=0.5,eps=0,lr=lr);
 }  
 
 module flexbatterAAA(n=1){
@@ -326,16 +326,18 @@ module epaper() {
             // display module
             translate([-dmw/2,-dmh/2,mth-0.01])cube ([dmw,dmh,dth+0.01]);
             // display (left, right, top == equal distance)
-            translate([-dw/2,-dmh/2+(dmw-dw)/2,mth+dth-0.01])cube ([dw,dh,10]);
+            translate([-dw/2,-dmh/2+(dmw-dw)/2-0.25,mth+dth-0.01])cube ([dw,dh,10]);
             // flat cable
             translate([-fw/2,mh/2-fh,+mth-0.01])cube ([fw,fh,dth+0.01]);
+            // unmounting hole
+            translate([4,-mh/2-1,0])cube([5,1,mth]);
     }
 }
 
 module epaper_snap() {
     hull(){
         cube([2,6,5]);
-        translate([1,1,3])cube([2.45,4,1]);
+        translate([1,1,3])cube([2.45,4,0.5]);
     }
 }
 
@@ -346,66 +348,75 @@ module prism(l, w, h){
                );
 }
 
-l=51.6;
+batt_h  = 51.6+1;
+inner_w = 38;
+batt_w  = 17.5;
+tot_w = inner_w + 2 * batt_w;
+disp_w = 28; // see epaper module
 
 union(){
     difference () {
-        translate ([-l-10,-16.5-34/2,-2])difference (){
-            cube([10+l, 16.5*2+34,2.1+2.5]);
+        translate ([-batt_h-11,-batt_w-inner_w/2,-2])difference (){
+            cube([11+batt_h, batt_w*2+inner_w,2.1+2.5]);
             x  = 15.0;
             dx = 4;
-            translate ([x+dx,1.2,2.1])union () {
-                cube([11.5,15.8,2.7]);
-                translate ([11.5/2,15.8/2,-3])
+            sx = 11.5;
+            sy = 15.8;
+            sz = 2.7;
+            plus_extrude_to_center = 2;
+            
+            #translate ([x+dx,tot_w/2-inner_w/2-sy+1,2.1])union () {
+                cube([sx,sy+plus_extrude_to_center,sz]);
+                translate ([sx/2,sy/2,-3])
                 linear_extrude(height = 4) {
                     rotate (90)mirror([1,0,0])
                     text ("\uf0c9",size=5,font="FontAwesome",halign="center",valign="center");
                 }
             }
-            translate ([x+dx+11.5+dx,1.2,2.1])union(){
-                cube([11.5,15.8,2.7]);
-                translate ([11.5/2,15.8/2,-3])
+            translate ([x+dx+sx+dx,tot_w/2-inner_w/2-sy+1,2.1])union(){
+                cube([sx,sy+plus_extrude_to_center,sz]);
+                translate ([sx/2,sy/2,-3])
                 linear_extrude(height = 4) {
                     rotate (90)mirror([1,0,0])
                     text ("\uf00c",size=5,font="FontAwesome",halign="center",valign="center");
                 }
             }
-            translate ([x+dx,1.2+33.5+15.2,2.1])union(){
-                cube([11.5,15.8,2.7]);
-                translate ([11.5/2,15.8/2,-3])
+            #translate ([x+dx,tot_w/2+inner_w/2-1-plus_extrude_to_center,2.1])union(){
+                cube([sx,sy+plus_extrude_to_center,sz]);
+                translate ([sx/2,sy/2+plus_extrude_to_center,-3])
                 linear_extrude(height = 4) {
                     rotate (90)mirror([1,0,0])
                     text ("\uf077",size=5,font="FontAwesome",halign="center",valign="center");
                 }
             }
-            translate ([x+dx+11.5+dx,1.2+33.5+15.2,2.1])union(){
-                cube([11.5,15.8,2.7]);
-                translate ([11.5/2,15.8/2,-3])
+            translate ([x+dx+sx+dx,tot_w/2+inner_w/2-1-plus_extrude_to_center,2.1])union(){
+                cube([sx,sy+plus_extrude_to_center,sz]);
+                translate ([sx/2,sy/2+plus_extrude_to_center,-3])
                 linear_extrude(height = 4) {
                     rotate (90)mirror([1,0,0])
                     text ("\uf078",size=5,font="FontAwesome",halign="center",valign="center");
                 }
             }
         }    
-        translate ([-51.6,0,-0.5])epaper();
+        translate ([-batt_h-1,0,-0.5])epaper();
     }
 
-     translate([-l-2.8,-6/2,-1])epaper_snap();
-     rotate([0,0,180])translate([0.1,-14,-1])epaper_snap();
-     rotate([0,0,180])translate([0.1,   8,-1])epaper_snap();
+     translate([-batt_h-3.8,-6/2,-1])epaper_snap();
+     rotate([0,0,180])translate([0.1+2,-14,-1])epaper_snap();
+     rotate([0,0,180])translate([0.1+2,   8,-1])epaper_snap();
 
     difference () {
-        translate([-l-10,-15/2,-1])cube([2,15,1+1*14.5+1+2.5]);
-        translate ([-l-9,-4/2,10+2.5]){
+        translate([-batt_h-11,-15/2,-1])cube([2,15,1+1*14.5+2+2.5]);
+        translate ([-batt_h-10,-4/2,10+2.5]){
             chamfered_cube ([5,4,3],0.9);
         }
     }
     translate ([0,0,2.5]){
-    translate([-l-1,-8.25-34/2,0])flexbatterAA(n=1,lr=[-1]);
-    translate([-l-1,+8.25+34/2,0])flexbatterAA(n=1,lr=[1]);
+    %translate([-batt_h-1,-8.25-inner_w/2,0])flexbatterAA(n=1,lr=[-1]);
+    %translate([-batt_h-1,+8.25+inner_w/2,0])flexbatterAA(n=1,lr=[1]);
     
-    translate ([-15,-34/2+6.99,11])rotate ([180,0,0])prism (2,7,7);    
-    translate ([-15,+34/2+0.01,5])rotate ([90,0,0])prism (2,7,7);    
+    translate ([-16,-inner_w/2+6.99,10])rotate ([180,0,0])prism (2,7,7);    
+    translate ([-16,+inner_w/2+0.01,4])rotate ([90,0,0])prism (2,7,7);    
     }
 }
 
