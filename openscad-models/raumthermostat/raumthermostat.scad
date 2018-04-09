@@ -315,7 +315,7 @@ module epaper() {
     dmw=32.5;   // display module width
     dmh=37;     // display module height
     dth=1.1;    // display module thickness
-    fw=14;      // flat cable width
+    fw=14.5;      // flat cable width
     fh=6.5;     // flat cable height
 
     translate ([mh/2,0,0+mth])
@@ -333,8 +333,9 @@ module epaper() {
 }
 
 module epaper_snap() {
-    hull(){
         cube([2,6,5]);
+    hull(){
+        translate([0,0,2])cube([2,6,3]);
         translate([1,1,3])cube([2.45,4,1]);
     }
 }
