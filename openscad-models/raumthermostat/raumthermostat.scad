@@ -159,10 +159,10 @@ r = d/5+2*ws; // linear spring length (depends on sline() call!)
 
          // holes for wires passing inside
          for(sy=lr)scale([1,sy,1]){
-	   // translate([l-1,-d/2,w])cube([w+2,2,2]);
+	    //translate([l-1,-d/2,w])cube([w+2,2,2]);
             for(x=[3,l-7])translate([x,-d/2-w-ws-1,w])cube([3,w+ws+3,2]); 
-         //   translate([3,-d/2+w/2-0.75,-1])cube([3,1.5,w+2]); 
-       //     translate([-0.5,-d/2+w/2,0])rotate([0,90,0])cylinder(r=w/2,h=6.5,$fn=5);
+         //  translate([3,-d/2+w/2-0.75,-1])cube([3,1.5,w+2]); 
+       //    translate([-0.5,-d/2+w/2,0])rotate([0,90,0])cylinder(r=w/2,h=6.5,$fn=5);
          }
 
          // engrave battery symbol
@@ -360,13 +360,13 @@ union(){
      rotate([0,0,180])translate([0.1,   8,-1])epaper_snap();
 
     difference () {
-        translate([-l-10,-15/2,-1])cube([2,15,1+1*14.5+1]);
+        translate([-l-10,-34/2,-1])cube([2,34,1+1*14.5+1]);
         translate ([-l-9,-4/2,10]){
             chamfered_cube ([5,4,3],0.9);
         }
     }
-    translate([-l-1,-8.25-34/2,0])flexbatterAA(n=1,lr=[-1]);
-    translate([-l-1,+8.25+34/2,0])flexbatterAA(n=1,lr=[1]);
+    translate([-l-1+43.6,+42.25-34/2,0])rotate([0,0,180])flexbatterAA(n=1,lr=[-1]);
+    translate([-l-1+43.6,-42.25+34/2,0])rotate([0,0,180])flexbatterAA(n=1,lr=[1]);
     
     translate ([-15,-34/2+6.99,11])rotate ([180,0,0])prism (2,7,7);    
     translate ([-15,+34/2+0.01,5])rotate ([90,0,0])prism (2,7,7);    
