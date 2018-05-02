@@ -303,7 +303,7 @@ module flexbatterAAAx4(){ // AUTO_MAKE_STL
 //translate([0,80,0])rotate([180,0,0])translate([0,0,-9])flexbatter18650(n=1);
 //translate([0,120,0])rotate([-90,0,0])translate([0,0,-9])flexbatter18650(n=1);
 //translate([0,33,0])flexbatter18650(n=2);
-//translate([0,90,0])flexbatter18650(n=3);
+//translate([0le,90,0])flexbatter18650(n=3);
 //translate([-90,33,0])flexbatter18650(n=4);
 
 
@@ -322,18 +322,18 @@ module prism(l, w, h){
                );
 }
 
-l=80;
-
+le=85;
+br=26;
 union(){
 
-     translate ([-l-10,-20/2,-2])cube([10+l, 20,2.1]);
+     translate ([-le,-br/2,-2])cube([le, br,2.1]);
 
-     translate([0-2,-20/2,-1])cube([2,20,1+1*14.5+1]);
-
-    
-    translate([-l+2,0,0])flexbatterCR123A(n=1);
-    
-    }
+     translate([0-1,-br/2,+4])cube([1,br,11.5]);
+     translate([0-le,-br/2,-1])cube([le,1,16.5]);
+     translate([0-le,+br/2-1,-1])cube([le,1,16.5]);
+   
+     translate([-le+8+2,0,0])flexbatterCR123A(n=1);
+ }
 
 
 //translate([0,50,0])flexbatterAAA(n=1);
