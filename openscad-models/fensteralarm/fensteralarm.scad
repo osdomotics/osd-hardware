@@ -328,11 +328,23 @@ union(){
 
      translate ([-le,-br/2,-2])cube([le, br,2.1]);
 
-     translate([0-1,-br/2,+4])cube([1,br,11.5]);
-     translate([0-le,-br/2,-1])cube([le,1,16.5]);
-     translate([0-le,+br/2-1,-1])cube([le,1,16.5]);
+     translate([0-2,-br/2,+1])cube([1,br,10]);
+     translate([0-le,-br/2,-1])cube([le,1,20]);
+     translate([0-le,+br/2-1,-1])cube([le,1,20]);
+
+     translate([0-le+1,-br/2,-1])cube([5,2,18]);
+     translate([0-le+1,+br/2-2,-1])cube([5,2,18]);
+
+     translate([0-36-5,-br/2,-1])cube([5,2,18]);
+     translate([0-36-5,+br/2-2,-1])cube([5,2,18]);
+
+     translate([0-6,-br/2,-1])cube([5,2,15]);
+     translate([0-6,+br/2-2,-1])cube([5,2,15]);
+
+     translate([0-le/2-31/2,-br/2,-1])cube([31,2,15]);
+     translate([0-le/2-31/2,+br/2-2,-1])cube([31,2,15]);
    
-     translate([-le+8+2,0,0])flexbatterCR123A(n=1);
+     translate([0-le+1.5+8+2,0,0])flexbatterCR123A(n=1);
  }
 
 
