@@ -348,6 +348,10 @@ union(){
      translate([0-28,+br/2-2-3-0.1,-1])cube([23,1.5,12]);
    
      translate([0-le+1.5+8+2,0,0])flexbatterCR123A(n=1);
+
+     translate([0-le+2,-br/2,13])cube([le-4,2,1]);
+     translate([0-le+2,+br/2-2,13])cube([le-4,2,1]);
+
  }
 
 
