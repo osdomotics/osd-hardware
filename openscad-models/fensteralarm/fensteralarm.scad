@@ -349,8 +349,11 @@ union(){
    
      translate([0-le+1.5+8+2,0,0])flexbatterCR123A(n=1);
 
-     translate([0-le+2,-br/2,13])cube([le-4,2,1]);
-     translate([0-le+2,+br/2-2,13])cube([le-4,2,1]);
+//     translate([0-le+2,-br/2,13])cube([le-4,2,1]);
+//     translate([0-le+2,+br/2-2,13])cube([le-4,2,1]);
+     
+     translate([0-le/2,-br/2+1,13])rotate([0,90,0])cylinder(le-4, 1, center=true);
+     translate([0-le/2,+br/2-1,13])rotate([0,90,0])cylinder(le-4, 1, center=true);
 
  }
 
