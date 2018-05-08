@@ -295,35 +295,11 @@ module flexbatterAAAx4(){ // AUTO_MAKE_STL
   flexbatterAAA(n=4);
 }
 
-// uncomment as needed:
-
-//flexbatterCR123A(n=2);
-//rotate([0,0,0])translate([0,0,-9])flexbatter18650(n=1);
-//translate([0,40,0])rotate([90,0,0])translate([0,0,-9])flexbatter18650(n=1);
-//translate([0,80,0])rotate([180,0,0])translate([0,0,-9])flexbatter18650(n=1);
-//translate([0,120,0])rotate([-90,0,0])translate([0,0,-9])flexbatter18650(n=1);
-//translate([0,33,0])flexbatter18650(n=2);
-//translate([0le,90,0])flexbatter18650(n=3);
-//translate([-90,33,0])flexbatter18650(n=4);
-
-
-module epaper_snap() {
-        cube([2,6,5]);
-    hull(){
-        translate([0,0,2])cube([2,6,3]);
-        translate([1,1,3])cube([2.45,4,1]);
-    }
-}
-
-module prism(l, w, h){
-       polyhedron(
-               points=[[0,0,0], [l,0,0], [l,w,0], [0,w,0], [0,w,h], [l,w,h]],
-               faces=[[0,1,2,3],[5,4,3,2],[0,4,5,1],[0,3,4],[5,2,1]]
-               );
-}
+// Startpoint Fensteralarm:
 
 le=85;
 br=26;
+
 union(){
 
      translate ([-le,-br/2,-2])cube([le, br,2.1]);
@@ -341,23 +317,15 @@ union(){
      translate([0-6,-br/2,-1])cube([5,2,15]);
      translate([0-6,+br/2-2,-1])cube([5,2,15]);
 
-     translate([0-le/2-31/2,-br/2,-1])cube([31,2,15]);
-     translate([0-le/2-31/2,+br/2-2,-1])cube([31,2,15]);
+     translate([0-le/2-39/2,-br/2,-1])cube([39,2,15]);
+     translate([0-le/2-39/2,+br/2-2,-1])cube([39,2,15]);
 
-     translate([0-28,-br/2+3+0.75,-1])cube([23,1.5,12]);
-     translate([0-28,+br/2-2-3-0.1,-1])cube([23,1.5,12]);
+     translate([0-24,-br/2+3+0.75,-1])cube([19,1.5,12]);
+     translate([0-24,+br/2-2-3-0.1,-1])cube([19,1.5,12]);
    
      translate([0-le+1.5+8+2,0,0])flexbatterCR123A(n=1);
-
-//     translate([0-le+2,-br/2,13])cube([le-4,2,1]);
-//     translate([0-le+2,+br/2-2,13])cube([le-4,2,1]);
      
      translate([0-le/2,-br/2+1,13])rotate([0,90,0])cylinder(le-4, 1, center=true);
      translate([0-le/2,+br/2-1,13])rotate([0,90,0])cylinder(le-4, 1, center=true);
 
  }
-
-
-//translate([0,50,0])flexbatterAAA(n=1);
-//flexbatterC(n=1);
-//flexbatterD(n=1);
