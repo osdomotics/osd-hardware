@@ -297,22 +297,24 @@ module flexbatterAAAx4(){ // AUTO_MAKE_STL
 
 // Startpoint Fensteralarm:
 
-le=85;
+le=87;
 br=26;
+ho=21;
 
 union(){
 
      translate ([-le,-br/2,-2])cube([le, br,2.1]);
 
-     translate([0-2,-br/2,+3])cube([1,br,8]);
-     translate([0-le,-br/2,-1])cube([le,1,20]);
-     translate([0-le,+br/2-1,-1])cube([le,1,20]);
+     translate([0-2.2,-br/2,+3])cube([1,br,8]);
+     translate([0-le+1.2,-br/2,+3])cube([1,br,8]);
+     translate([0-le,-br/2,-1])cube([le,1,ho]);
+     translate([0-le,+br/2-1,-1])cube([le,1,ho]);
 
-     translate([0-le+1,-br/2,-1])cube([5,2,18]);
-     translate([0-le+1,+br/2-2,-1])cube([5,2,18]);
+     translate([0-le+1,-br/2,-1])cube([5,2,ho-2]);
+     translate([0-le+1,+br/2-2,-1])cube([5,2,ho-2]);
 
-     translate([0-36-6,-br/2,-1])cube([5,2,18]);
-     translate([0-36-6,+br/2-2,-1])cube([5,2,18]);
+     translate([0-36-6,-br/2,-1])cube([5,2,ho-2]);
+     translate([0-36-6,+br/2-2,-1])cube([5,2,ho-2]);
 
      translate([0-6,-br/2,-1])cube([5,2,15]);
      translate([0-6,+br/2-2,-1])cube([5,2,15]);
@@ -323,7 +325,7 @@ union(){
      translate([0-24,-br/2+3+0.75,-1])cube([19,1.5,12]);
      translate([0-24,+br/2-2-3-0.1,-1])cube([19,1.5,12]);
    
-     translate([0-le+1.5+8+2,0,0])flexbatterCR123A(n=1);
+     translate([0-le+1.5+8+4,0,0])flexbatterCR123A(n=1);
      
      translate([0-le/2,-br/2+1,13])rotate([0,90,0])cylinder(le-4, 1, center=true);
      translate([0-le/2,+br/2-1,13])rotate([0,90,0])cylinder(le-4, 1, center=true);
