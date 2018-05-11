@@ -6,7 +6,7 @@ br=26;
 
 union(){
 
-     translate ([-le,-br/2+1,-2])cube([le, br-2,2.1]);
+     translate ([-le,-br/2+1.5,-2])cube([le, br-3,2.1]);
 
      translate([0-1,-br/2+1.5,0])cube([1,br-3,18]);
      translate([0-le,-br/2+1.5,0])cube([1,br-3,18]);
