@@ -2,22 +2,22 @@
 // Startpoint Router ground:
 
 le=90;
-br=53;
+br=54;
 hr=25;
 
 module usb_eth(){
     difference() {
-        translate([0-le,-br/2+1.5,0])cube([le,1,hr]);
-        translate([0-5-10,-br/2+1,6])cube([5,2,13]);        
-        translate([0-13-20,-br/2+1,6])cube([13,2,13]);        
+        translate([0-le,-br/2,0])cube([le,1,hr]);
+        translate([0-5-10,-br/2-0.5,6])cube([5,2,13]);        
+        translate([0-13-20,-br/2-0.5,6])cube([13,2,13]);        
     }
  }
 
 module usb_sdcard(){
     difference() {
-        translate([0-le,br/2-1-1.5,0])cube([le,1,hr]);
-        translate([0-8-9,br/2-3,5.5])cube([8,2,3]);        
-        translate([0-12-25,br/2-3,2])cube([12,2,1.6]);        
+        translate([0-le,br/2-1,0])cube([le,1,hr]);
+        translate([0-8-9,br/2-1.5,5.5])cube([8,2,3]);        
+        translate([0-12-24,br/2-1.5,2])cube([12,2,2]);        
     }
 }
 
@@ -31,30 +31,30 @@ module merkur_snap() {
 
 union(){
 
-     translate ([-le,-br/2+1.5,0])cube([le, br-3,2.1]);
+     translate ([-le,-br/2,0])cube([le, br,2.1]);
 
-     translate([0-1,-br/2+1.5,0])rotate([0,-0,0])cube([1,br-3,hr]);
-     translate([0-le,-br/2+1.5,0])rotate([0,0,0])cube([1,br-3,hr]);
+     translate([0-1,-br/2,0])rotate([0,-0,0])cube([1,br,hr]);
+     translate([0-le,-br/2,0])rotate([0,0,0])cube([1,br,hr]);
      
 
      usb_sdcard();
      usb_eth();
     
     $fn=100;
-    translate([-4.5,21,2])cylinder(4, 3, 3, center=true);
-    translate([-4.5,-21,2])cylinder(4, 3, 3, center=true);
-    translate([-4.5-40,21,2])cylinder(4, 3, 3, center=true);
-    translate([-4.5-40,-21,2])cylinder(4, 3, 3, center=true);
+    translate([-4.5,23,2])cylinder(4, 3, 3, center=true);
+    translate([-4.5,-18,2])cylinder(4, 3, 3, center=true);
+    translate([-4.5-40,23,2])cylinder(4, 3, 3, center=true);
+    translate([-4.5-40,-18,2])cylinder(4, 3, 3, center=true);
 
-    translate([-4.5,21,4])cylinder(8, 1.25, 1.25, center=true);
-    translate([-4.5,-21,4])cylinder(8, 1.25, 1.25, center=true);
-    translate([-4.5-40,21,4])cylinder(8, 1.25, 1.25, center=true);
-    translate([-4.5-40,-21,4])cylinder(8, 1.25, 1.25, center=true);
+    translate([-4.5,23,4])cylinder(8, 1.25, 1.25, center=true);
+    translate([-4.5,-18,4])cylinder(8, 1.25, 1.25, center=true);
+    translate([-4.5-40,23,4])cylinder(8, 1.25, 1.25, center=true);
+    translate([-4.5-40,-18,4])cylinder(8, 1.25, 1.25, center=true);
 
-   translate([-76,-12,0])rotate([0,0,0])cube([1,5,5]);
-   translate([-76+24.5,-12,0])rotate([0,0,0])cube([1,5,5]);
-   translate([-60,-23,2])rotate([0,0,90])merkur_snap();
-   translate([-70-6,12,2])rotate([0,0,-90])merkur_snap();
-   translate([-50-6,12,2])rotate([0,0,-90])merkur_snap();
+   translate([-77.5,-12,0])rotate([0,0,0])cube([1,5,5]);
+   translate([-77+25,-12,0])rotate([0,0,0])cube([1,5,5]);
+   translate([-60,-25,2])rotate([0,0,90])merkur_snap();
+   translate([-74-6,15,2])rotate([0,0,-90])merkur_snap();
+   translate([-48-6,15,2])rotate([0,0,-90])merkur_snap();
    
  }
