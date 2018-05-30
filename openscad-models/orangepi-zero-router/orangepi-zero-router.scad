@@ -51,16 +51,16 @@ union(){
      usb_eth();
     
     $fn=100;
-    translate([-5.5,22.5,2])cylinder(5, 3, 3, center=true);
+    translate([-5.5,22.5,3])cylinder(5, 3, 3, center=true);
     // translate([-5.5,22.5,4])cylinder(8, 1.25, 1.25, center=true);
 
-    translate([-5.5,-20,2])cylinder(5, 3, 3, center=true);
+    translate([-5.5,-20,3])cylinder(5, 3, 3, center=true);
     //translate([-5.5,-20,4])cylinder(8, 1.25, 1.25, center=true);
 
-    translate([-5-41,22.5,2])cylinder(5, 3, 3, center=true);
+    translate([-5-41,22.5,3])cylinder(5, 3, 3, center=true);
     translate([-5-41,22.5,4])cylinder(8, 1.25, 1.25, center=true);
 
-    translate([-5-41,-20,2])cylinder(5, 3, 3, center=true);
+    translate([-5-41,-20,3])cylinder(5, 3, 3, center=true);
     translate([-5-41,-20,4])cylinder(8, 1.25, 1.25, center=true);
 
    translate([-81.5,-12,0])rotate([0,0,0])cube([1,5,6]);
