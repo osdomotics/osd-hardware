@@ -8,16 +8,16 @@ hr=25;
 module usb_eth(){
     difference() {
         translate([0-le,-br/2,0])cube([le,1.5,hr]);
-        translate([0-16,-br/2-0.5,6])cube([6,3,13]);        
-        translate([0-15-19,-br/2-0.5,6])cube([15,3,13]);        
+        translate([0-16,-br/2-0.5,8])cube([6,3,13]);        
+        translate([0-15-19,-br/2-0.5,8])cube([14.5,3,13]);        
     }
  }
 
 module usb_sdcard(){
     difference() {
         translate([0-le,br/2-1.5,0])cube([le,1.5,hr]);
-        translate([0-8-9,br/2-2,5.5])cube([8,3,4]);        
-        translate([0-12-25,br/2-2,2])cube([12,3,3]);        
+        translate([0-8-9,br/2-2,7])cube([8,3,3]);        
+        translate([0-12-25,br/2-2,3])cube([12,3,2]);        
     }
 }
 
@@ -36,6 +36,12 @@ module orange_snap() {
     }
 }
 
+module holders(){
+   translate([0-1.5,-br/2+10,hr-4])sphere (d=3);
+   translate([0-1.5,+br/2-10,hr-4])sphere (d=3);
+   translate([0-le+1.5,-br/2+10,hr-4])sphere (d=3);
+   translate([0-le+1.5,+br/2-10,hr-4])sphere (d=3);
+}
 union(){
      translate ([-le,-br/2,0])cube([le, br,2.1]);
      translate([0-1.5,-br/2,0])rotate([0,-0,0])cube([1.5,br,hr]);
@@ -68,4 +74,5 @@ union(){
    translate([-50,22,0])rotate([0,0,0])cube([1,5,8]);
    translate([-50,-25,0])rotate([0,0,0])cube([1,5,8]);
 
+   holders();
  }
