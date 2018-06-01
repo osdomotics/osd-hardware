@@ -9,7 +9,7 @@ module usb_eth(){
     difference() {
         translate([0-le,-br/2,0])cube([le,1.5,hr]);
         translate([0-16,-br/2-0.5,8])cube([6,3,13]);        
-        translate([0-15-19,-br/2-0.5,8])cube([14.5,3,13]);        
+        translate([0-14.5-19,-br/2-0.5,8])cube([14,3,13]);        
     }
  }
 
@@ -50,7 +50,7 @@ union(){
      usb_sdcard();
      usb_eth();
     
-    $fn=100;
+    $fn=20;
     translate([-5.5,22.5,3])cylinder(5, 3, 3, center=true);
     // translate([-5.5,22.5,4])cylinder(8, 1.25, 1.25, center=true);
 
