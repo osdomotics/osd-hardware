@@ -8,9 +8,9 @@ $fn=20;
 union(){
     difference() {
       translate ([0,0,0])cube([le, br,2]);
-      translate ([5,5,-0.5])cube([35, 3,3]);
-      translate ([5,20,-0.5])cube([35, 3,3]);
-      translate ([5,35,-0.5])cube([35, 3,3]);
+      translate ([5,5,-1])cube([35, 3,4]);
+      translate ([5,20,-1])cube([35, 3,4]);
+      translate ([5,35,-1])cube([35, 3,4]);
     }
     translate ([2.1,2.1,0])cube([le-4.2, 2,4]);
     translate ([2.1,br-4.2,0])cube([le-4.2, 2,4]);
