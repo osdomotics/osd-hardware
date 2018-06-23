@@ -63,16 +63,24 @@ union(){
     translate([-5-41,-20,3])cylinder(5, 3, 3, center=true);
     translate([-5-41,-20,4])cylinder(8, 1.25, 1.25, center=true);
 
-   translate([-81.5,-12,0])rotate([0,0,0])cube([1,5,6]);
-   translate([-81+25,-12,0])rotate([0,0,0])cube([1,5,6]);
-   translate([-65,-25,2])rotate([0,0,90])merkur_snap();
-   translate([-78-6,15,2])rotate([0,0,-90])merkur_snap();
-   translate([-52-6,15,2])rotate([0,0,-90])merkur_snap();
+   // Merkurboard holder
+    translate([-81+14,-br/2+1.5,7])sphere (d=3);
+    translate([-81+14,br/2-1.5,7])sphere (d=3);
+
+   translate([-81.5,-12,0])rotate([0,0,0])cube([1,6,8]);
+   translate([-81+25,-12,0])rotate([0,0,0])cube([1,6,8]);
+   translate([-81.5,12,0])rotate([0,0,0])cube([1,6,8]);
+   translate([-81+25,12,0])rotate([0,0,0])cube([1,6,8]);
+   //translate([-65,-25,2])rotate([0,0,90])merkur_snap();
+   //translate([-78-6,15,2])rotate([0,0,-90])merkur_snap();
+   //translate([-52-6,15,2])rotate([0,0,-90])merkur_snap();
  
    translate([0,-17,5])rotate([0,0,180])orange_snap();
    translate([0,25,5])rotate([0,0,180])orange_snap();
-   translate([-50,22,0])rotate([0,0,0])cube([1,5,8]);
-   translate([-50,-25,0])rotate([0,0,0])cube([1,5,8]);
+   translate([-50,20,0])rotate([0,0,0])cube([1,6,8]);
+   translate([-50,-23,0])rotate([0,0,0])cube([1,6,8]);
+
+   translate([-18.5,-27,0])rotate([0,0,0])cube([1,2,hr-3]);
 
    holders();
  }
