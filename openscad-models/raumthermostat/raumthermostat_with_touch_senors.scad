@@ -92,7 +92,7 @@ module sline(angle,radius,i,w,h){
 //////////////////////////////////////////////////////////////////////////////////
 module flexbatter(n=1,l=65,d=18,hf=0.75,r=4,shd=3,eps=0.28,el=0,xchan=[1/4,3/4],$fn=24,lr=[1,-1]){
 ew=0.50;   // extrusion width
-eh=0.25;   // extrusion height
+eh=0.4;   // extrusion height
 w = 2*ew+1;  // case wall thickness
 ws = 2*ew; // spring wall thickness
 ch = 0;//w-ws; // edge chamfering
@@ -354,73 +354,102 @@ batt_w  = 17.5;
 tot_w = inner_w + 2 * batt_w;
 disp_w = 28; // see epaper module
 
-union(){
-    difference () {
-        translate ([-batt_h-11,-batt_w-inner_w/2,-2])difference (){
-            cube([11+batt_h, batt_w*2+inner_w,2.1+2.5]);
-            x  = 15.0;
-            dx = 4;
-            sx = 11.5;
-            sy = 15.8;
-            sz = 2.7;
-            plus_extrude_to_center = 2;
-            
-            #translate ([x+dx,tot_w/2-inner_w/2-sy+1,2.1])union () {
-                cube([sx,sy+plus_extrude_to_center,sz]);
-                translate ([sx/2,sy/2,-3])
-                linear_extrude(height = 4) {
-                    rotate (90)mirror([1,0,0])
-                    text ("\uf0c9",size=5,font="FontAwesome",halign="center",valign="center");
-                }
+module case (touchbtns = true) {  
+    union(){
+        difference () {
+            translate ([-batt_h-11,-batt_w-inner_w/2,-2])
+            if (touchbtns == true) {
+                difference (){
+                    cube([11+batt_h, batt_w*2+inner_w,2.1+2.5]);
+                    x  = 15.0;
+                    dx = 4;
+                    sx = 11.5;
+                    sy = 15.8;
+                    sz = 2.7;
+                    plus_extrude_to_center = 2;
+                    
+                    translate ([x+dx,tot_w/2-inner_w/2-sy+1,2.1])union () {
+                        cube([sx,sy+plus_extrude_to_center,sz]);
+                        translate ([sx/2,sy/2,-3])
+                        linear_extrude(height = 4) {
+                            rotate (90)mirror([1,0,0])
+                            text ("\uf0c9",size=5,font="FontAwesome",halign="center",valign="center");
+                        }
+                    }
+                    translate ([x+dx+sx+dx,tot_w/2-inner_w/2-sy+1,2.1])union(){
+                        cube([sx,sy+plus_extrude_to_center,sz]);
+                        translate ([sx/2,sy/2,-3])
+                        linear_extrude(height = 4) {
+                            rotate (90)mirror([1,0,0])
+                            text ("\uf00c",size=5,font="FontAwesome",halign="center",valign="center");
+                        }
+                    }
+                    translate ([x+dx,tot_w/2+inner_w/2-1-plus_extrude_to_center,2.1])union(){
+                        cube([sx,sy+plus_extrude_to_center,sz]);
+                        translate ([sx/2,sy/2+plus_extrude_to_center,-3])
+                        linear_extrude(height = 4) {
+                            rotate (90)mirror([1,0,0])
+                            text ("\uf077",size=5,font="FontAwesome",halign="center",valign="center");
+                        }
+                    }
+                    translate ([x+dx+sx+dx,tot_w/2+inner_w/2-1-plus_extrude_to_center,2.1])union(){
+                        cube([sx,sy+plus_extrude_to_center,sz]);
+                        translate ([sx/2,sy/2+plus_extrude_to_center,-3])
+                        linear_extrude(height = 4) {
+                            rotate (90)mirror([1,0,0])
+                            text ("\uf078",size=5,font="FontAwesome",halign="center",valign="center");
+                        }
+                    }
+                }    
+            } else {
+                cube([11+batt_h, batt_w*2+inner_w,2.1]);
             }
-            translate ([x+dx+sx+dx,tot_w/2-inner_w/2-sy+1,2.1])union(){
-                cube([sx,sy+plus_extrude_to_center,sz]);
-                translate ([sx/2,sy/2,-3])
-                linear_extrude(height = 4) {
-                    rotate (90)mirror([1,0,0])
-                    text ("\uf00c",size=5,font="FontAwesome",halign="center",valign="center");
-                }
-            }
-            #translate ([x+dx,tot_w/2+inner_w/2-1-plus_extrude_to_center,2.1])union(){
-                cube([sx,sy+plus_extrude_to_center,sz]);
-                translate ([sx/2,sy/2+plus_extrude_to_center,-3])
-                linear_extrude(height = 4) {
-                    rotate (90)mirror([1,0,0])
-                    text ("\uf077",size=5,font="FontAwesome",halign="center",valign="center");
-                }
-            }
-            translate ([x+dx+sx+dx,tot_w/2+inner_w/2-1-plus_extrude_to_center,2.1])union(){
-                cube([sx,sy+plus_extrude_to_center,sz]);
-                translate ([sx/2,sy/2+plus_extrude_to_center,-3])
-                linear_extrude(height = 4) {
-                    rotate (90)mirror([1,0,0])
-                    text ("\uf078",size=5,font="FontAwesome",halign="center",valign="center");
-                }
-            }
-        }    
-        translate ([-batt_h-1,0,-0.5])epaper();
-    }
+            translate ([-batt_h-1,0,-0.5])epaper();
+        }
 
-     translate([-batt_h-3.8,-6/2,-1])epaper_snap();
-     rotate([0,0,180])translate([0.1+2,-14,-1])epaper_snap();
-     rotate([0,0,180])translate([0.1+2,   8,-1])epaper_snap();
+         translate([-batt_h-3.8,-6/2,-1])epaper_snap();
+         rotate([0,0,180])translate([0.1+2,-14,-1])epaper_snap();
+         rotate([0,0,180])translate([0.1+2,   8,-1])epaper_snap();
 
-    difference () {
-        translate([-batt_h-11,-15/2,-1])cube([2,15,1+1*14.5+2+2.5]);
-        translate ([-batt_h-10,-4/2,10+2.5]){
-            chamfered_cube ([5,4,3],0.9);
+    if (touchbtns == true) {
+        difference () {
+            translate([-batt_h-11,-15/2,-1])cube([2,15,1+1*14.5+2+2.5]);
+            translate ([-batt_h-10,-4/2,10+2.5]){
+                chamfered_cube ([5,4,3],0.9);
+            }
+        }
+    } else {
+        difference () {
+            translate([-batt_h-11,-15/2,-1])cube([2,15,1+1*14.5+2]);
+            translate ([-batt_h-10,-4/2,10]){
+                chamfered_cube ([5,4,3],0.9);
+            }
         }
     }
-    translate ([0,0,2.5]){
-    %translate([-batt_h-1,-8.25-inner_w/2,0])flexbatterAA(n=1,lr=[-1]);
-    %translate([-batt_h-1,+8.25+inner_w/2,0])flexbatterAA(n=1,lr=[1]);
-    
-    translate ([-16,-inner_w/2+6.99,10])rotate ([180,0,0])prism (2,7,7);    
-    translate ([-16,+inner_w/2+0.01,4])rotate ([90,0,0])prism (2,7,7);    
+    if (touchbtns == true) {
+        translate ([0,0,2.5]){
+        translate([-batt_h-1,-8.25-inner_w/2,0])flexbatterAA(n=1,lr=[-1]);
+        translate([-batt_h-1,+8.25+inner_w/2,0])flexbatterAA(n=1,lr=[1]);
+        
+        translate ([-16,-inner_w/2+7.99,10])rotate ([180,0,0])prism (2,8,8);    
+        translate ([-16,+inner_w/2+0.01,4])rotate ([90,0,0])prism (2,8,8);    
+        }
+    } else {
+        translate ([0,0,0]){
+        translate([-batt_h-1,-8.25-inner_w/2,0])flexbatterAA(n=1,lr=[-1]);
+        translate([-batt_h-1,+8.25+inner_w/2,0])flexbatterAA(n=1,lr=[1]);
+        
+        translate ([0,0,2.5]) {
+        translate ([-16,-inner_w/2+7.99,10])rotate ([180,0,0])prism (2,8,8);    
+        translate ([-16,+inner_w/2+0.01,4])rotate ([90,0,0])prism (2,8,8);    
+        }
+    }
     }
 }
-
+}
 
 //translate([0,50,0])flexbatterAAA(n=1);
 //flexbatterC(n=1);
 //flexbatterD(n=1);
+
+case (touchbtns = false);
